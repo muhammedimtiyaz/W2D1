@@ -21,14 +21,14 @@ KEYMAP = {
   "\177" => :backspace,
   "\004" => :delete,
   "\u0003" => :ctrl_c,
-}
+}.freeze
 
 MOVES = {
   left: [0, -1],
   right: [0, 1],
   up: [-1, 0],
   down: [1, 0]
-}
+}.freeze
 
 class Cursor
 
@@ -99,12 +99,14 @@ class Cursor
   def update_pos(diff)
     x1, y1 = @cursor_pos
     x2, y2 = diff
-    new_pos = [(x1 + x2), (y1 + y2)]
-    if @board.valid_pos?(new_pos)
+    new_pos = [(x1 + x2) % 8, (y1 + y2) % 8]
+    if valid_pos?(new_pos)
         @cursor_pos = new_pos
-    end 
-
+    end
   end
 
-
+  def valid_pos?(pos)
+    x , y = pos
+    x.between?(0,7) && y.between?(0,7)    
+  end
 end

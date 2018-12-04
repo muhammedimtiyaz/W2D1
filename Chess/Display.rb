@@ -6,22 +6,29 @@ class Display
 
     attr_reader :cursor
 
-    def initialize
+    def initialize(board)
         @cursor = Cursor.new([0,0], board)
         @board = board
     end 
 
-    def display(board)
-        i=0
+    # def render(board)
+    #     i=0
+    #     while i < 3
+    #         temp = @board[cursor_pos].to_s.colorize
+    #         p temp
+    #         cursor.get_input
+    #         i += 1
+    #     end
+    # end
+
+    def test
+         i=0
         while i < 3
-            cursor.cursor_pos.colorize
-            render
             cursor.get_input
+            p @board
             i += 1
         end
     end
 
-    def render
-        @board
-    end 
+    
 end
